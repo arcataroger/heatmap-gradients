@@ -29,6 +29,24 @@ const metrics = [
         s1: 0,
         l0: 0,
         l1: 80
+    },
+    {
+        param: 'frame_counter_saved',
+        h0: 0,
+        h1: 330,
+        s0: 100,
+        s1: 0,
+        l0: 75,
+        l1: 0,
+    },
+    {
+        param: 'sensor_temp_1',
+        h0: 240,
+        h1: -240,
+        s0: 100,
+        s1: 0,
+        l0: 50,
+        l1: 0,
     }
 ]
 
@@ -74,7 +92,8 @@ function App() {
     return <>
         <h1>Color interpolation test</h1>
 
-        {[...Array(10).keys()].map(i => <ColorDisplay steps={i + 1}/>)}
+        <ColorDisplay steps={10}/>
+        <ColorDisplay steps={3}/>
 
         {/*
 
