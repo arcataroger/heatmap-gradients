@@ -90,9 +90,9 @@ const metricColors = metrics.map(metric => {
     for (let i = 0; i <= 10; i++) {
         colors.push(
             {
-                h: ((metric.h0 ?? defaults.h0) + ((metric.h1 ?? defaults.h1) * i) / 10) / 360.0,
-                s: ((metric.s0 ?? defaults.s0) + ((metric.s1 ?? defaults.s1) * i) / 10) / 100,
-                l: ((metric.l0 ?? defaults.l0) + ((metric.l1 ?? defaults.l1) * i) / 10) / 100,
+                h: ((metric.h0 ?? defaults.h0) + ((metric.h1 ?? defaults.h1) * i) / 10),
+                s: ((metric.s0 ?? defaults.s0) + ((metric.s1 ?? defaults.s1) * i) / 10),
+                l: ((metric.l0 ?? defaults.l0) + ((metric.l1 ?? defaults.l1) * i) / 10),
             }
         )
     }
@@ -104,37 +104,13 @@ function App() {
     return <>
         <h1>Color test</h1>
 
-        <h2>Using Chilicon Functions</h2>
-        {
-            metricColors.map(metric => {
-
-                const chiliconHexColors = metric.colors.map(color => hslToRgb(color.h, color.s, color.l)).join()
-
-                return <>
-
-                    <div style={{
-                        width: '90vw',
-                        background: `linear-gradient(to right, ${chiliconHexColors})`,
-                        margin: '10px',
-                        padding: '10px',
-                        color: 'black',
-                    }}>
-                        <span style={{font: "bold 20pt sans-serif", background: 'white'}}>{metric.name}</span>
-                        <span style={{font: "10pt sans-serif", marginLeft: "1em"}}>{chiliconHexColors}</span>
-                    </div>
-                </>
-
-            })
-        }
-
         <h2>Using HSL</h2>
         {
             metricColors.map(metric => {
 
-                const hslColors = metric.colors.map(color => `hsl(${color.h}, ${color.s}, ${color.l})`).join()
+                const hslColors = metric.colors.map(color => `hsl(${color.h}deg, ${color.s}%, ${color.l}%)`).join()
 
                 return <>
-
                     <div style={{
                         width: '90vw',
                         background: `linear-gradient(to right, ${hslColors})`,
