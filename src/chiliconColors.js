@@ -1,3 +1,5 @@
+
+
 function setupParamVariables(param) {
     let min = chartMinValue;
     let delta = chartMaxValue - chartMinValue;
@@ -166,3 +168,55 @@ function setupParamVariables(param) {
         l1: l1,
     }
 }
+
+/*
+<option value='p_out_avg'>Average Output Power (W)</option>
+								<option value='adc_vpv_last_sum'>PV Voltage (V)</option>
+								<option value='i_pv'>PV Current (A)</option>
+								<option value='flash_page_total_energy'>Total Energy Produced (kWh)</option>
+								<option value='sensor_temp_1'>DC/DC Temperature (&#176;C)</option>
+								<option value='sensor_temp_3'>Board Temperature (&#176;C)</option>
+								<option value='v_grid_sum_sq_ema'>Grid Voltage (Vrms)</option>
+								<option value='v_grid_thd'>Grid Voltage THD (%)</option>
+								<option value='i_grid_thd_slow_ema'>Grid Current THD (%)</option>
+								<option value='cycle_duration_jitter_average'>Cycle Duration Jitter (&mu;s)</option>
+								<option value='max_cycle_duration_error_abs'>Cycle Duration Max Error (&mu;s)</option>
+								<option value='flash_page_decoded_packet_cnt'>Decoded Packet Count</option>
+								<option value='flash_page_comm_check_sum_error'>Checksum Error Count</option>
+								<option value='flash_page_operating_time'>Operating Time (Hrs)</option>
+								<option value='flash_page_firmware_version_id'>Firmware Version</option>
+							{% else %} {# only for admins #}
+								<option value='p_out_avg'>Average Output Power (W)</option>
+								<option value='adc_vpv_last_sum'>PV Voltage (V)</option>
+								<option value='i_pv'>PV Current (A)</option>
+								<option value='input_power_integral_old'>Input Power (W)</option>
+								<option value='efficiency'>Efficiency (%)</option>
+								<option value='gain'>Gain (%)</option>
+								<option value='flash_page_total_energy'>Total Energy Produced (kWh)</option>
+								<option value='sensor_temp_1'>DC/DC Temperature (&#176;C)</option>
+								<option value='sensor_temp_3'>Board Temperature (&#176;C)</option>
+								<option value='flyback_ton'>Flyback Duty Cycle (%)</option>
+								<option value='flyback_voltage_slow_ema'>Flyback Voltage (V)</option>
+								<option value='v_grid_sum_sq_ema'>Grid Voltage (Vrms)</option>
+								<option value='v_grid_thd'>Grid Voltage THD (%)</option>
+								<option value='i_grid_thd_slow_ema'>Grid Current THD (%)</option>
+								<option value='cycle_duration_jitter_average'>Cycle Duration Jitter (&mu;s)</option>
+								<option value='max_cycle_duration_error_abs'>Cycle Duration Max Error (&mu;s)</option>
+								<option value='flash_page_decoded_packet_cnt'>Decoded Packet Count</option>
+								<option value='flash_page_comm_check_sum_error'>PV Module Impedance</option>
+								<option value='decoded_golay_bit_err_cnt'>Golay Bit Error Count</option>
+								<option value='decoded_golay_word_cnt'>Decoded Golay Word Count</option>
+								<option value='flash_page_operating_time'>Operating Time (Hrs)</option>
+								<option value='ms_ticks'>ms Ticks (seconds)</option>
+								<option value='ac_over_current_event_count_max'>Over Current Even Count (max)</option>
+								<option value='process'>Process ID</option>
+								<option value='flash_page_firmware_upgrade_error_status'>Firmware Upgrade Error Status</option>
+								<option value='high_word'>High Word</option>
+								<option value='flash_page_firmware_version_id'>Firmware Version</option>
+								<option value='hardware_version'>Hardware Version</option>
+								<option value='status'>Status Word</option>
+								<option value='status2'>Status Word 2</option>
+								<option value='frame_counter_save'>Frame Counter Saved</option>
+								<option value='status_save'>Status Word Saved At Disconnect</option>
+								<option value='status2_save'>Status Word 2 Saved At Disconnect</option>
+ */
