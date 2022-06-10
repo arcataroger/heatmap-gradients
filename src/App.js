@@ -37,10 +37,6 @@ function hslToRgb(h, s, l) {
 }
 
 const defaults = {
-    min: 0,
-    delta: 0,
-    unit: '',
-    precision: 1,
     h0: 115,
     s0: 85,
     l0: 10,
@@ -52,17 +48,10 @@ const defaults = {
 const metrics = [
     {
         param: 'p_out_avg',
-        min: 0,
-        delta: 400,
-        unit: 'W',
         l1: 92
     },
     {
         param: 'efficiency',
-        min: 75,
-        delta: 25,
-        unit: '%',
-        precision: 100,
         h0: 0,
         h1: 120,
         s0: 100,
@@ -72,10 +61,6 @@ const metrics = [
     },
     {
         param: 'adc_vpv_lat_sum',
-        min: 8,
-        delta: 82, // (chartMaxValue < 50 ? 45 : 90) - min;
-        unit: 'V',
-        precision: 10,
         h0: 190,
         h1: -190,
         s0: 100,
@@ -85,49 +70,55 @@ const metrics = [
     }
 ]
 
-const metricColors = metrics.map(metric => {
+const metricColors = steps => metrics.map(metric => {
     let colors = []
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i <= steps; i++) {
         colors.push(
             {
-                h: ((metric.h0 ?? defaults.h0) + ((metric.h1 ?? defaults.h1) * i) / 10),
-                s: ((metric.s0 ?? defaults.s0) + ((metric.s1 ?? defaults.s1) * i) / 10),
-                l: ((metric.l0 ?? defaults.l0) + ((metric.l1 ?? defaults.l1) * i) / 10),
+                h: ((metric.h0 ?? defaults.h0) + ((metric.h1 ?? defaults.h1) * i) / steps),
+                s: ((metric.s0 ?? defaults.s0) + ((metric.s1 ?? defaults.s1) * i) / steps),
+                l: ((metric.l0 ?? defaults.l0) + ((metric.l1 ?? defaults.l1) * i) / steps),
             }
         )
     }
     return ({name: metric.param, colors})
 })
 
+const ColorDisplay = props => <>
+    <h2>Gradient steps: {props.steps + 1}</h2>
+    {
+        metricColors(props.steps).map(metric => {
+
+            const hslColors = metric.colors.map(color => `hsl(${color.h}deg, ${color.s}%, ${color.l}%)`).join()
+
+            return <>
+                <div style={{
+                    width: '90vw',
+                    background: `linear-gradient(to right, ${hslColors})`,
+                    margin: '10px',
+                    padding: '10px',
+                    color: 'black',
+                }}>
+                    <span style={{font: "bold 20pt sans-serif", background: 'white'}}>{metric.name}</span>
+                    {/*<span style={{font: "10pt sans-serif", marginLeft: "1em"}}>{hslColors}</span>*/}
+                </div>
+            </>
+        })
+    }
+    </>
+
 
 function App() {
     return <>
-        <h1>Color test</h1>
+        <h1>Color interpolation test</h1>
 
-        <h2>Using HSL</h2>
-        {
-            metricColors.map(metric => {
+        {[...Array(10).keys()].map(i => <ColorDisplay steps={i+1}/>)}
 
-                const hslColors = metric.colors.map(color => `hsl(${color.h}deg, ${color.s}%, ${color.l}%)`).join()
-
-                return <>
-                    <div style={{
-                        width: '90vw',
-                        background: `linear-gradient(to right, ${hslColors})`,
-                        margin: '10px',
-                        padding: '10px',
-                        color: 'black',
-                    }}>
-                        <span style={{font: "bold 20pt sans-serif", background: 'white'}}>{metric.name}</span>
-                        <span style={{font: "10pt sans-serif", marginLeft: "1em"}}>{hslColors}</span>
-                    </div>
-                </>
-
-            })
-        }
+{/*
 
         <h2>JSON Dump</h2>
         <pre>{JSON.stringify(metricColors, null, 2)}</pre>
+*/}
 
     </>
 }
