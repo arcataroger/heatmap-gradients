@@ -1,41 +1,3 @@
-// returns a hex string from a decimal number (positive of negative). The HEX string will have at least 2 digits
-function decimalToHexString(number) {
-    if (number < 0) {
-        number = 0xffffffff + number + 1;
-    }
-    let hex = number.toString(16).toUpperCase();
-    return hex.length < 2 ? "0" + hex : hex;
-}
-
-
-// Assumes h, s, and l are contained in the set [0, 1] and returns a color of format #RRGGBB
-function hslToRgb(h, s, l) {
-    var r, g, b;
-    if (s === 0) {
-        r = g = b = l; // achromatic
-    } else {
-        var hue2rgb = function hue2rgb(p, q, t) {
-            if (t < 0) t += 1;
-            if (t > 1) t -= 1;
-            if (t < 1 / 6) return p + (q - p) * 6 * t;
-            if (t < 1 / 2) return q;
-            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-            return p;
-        };
-        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-        var p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1 / 3);
-        g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1 / 3);
-    }
-    return (
-        "#" +
-        decimalToHexString(Math.round(r * 255)) +
-        decimalToHexString(Math.round(g * 255)) +
-        decimalToHexString(Math.round(b * 255))
-    );
-}
-
 const defaults = {
     h0: 115,
     s0: 85,
@@ -105,16 +67,16 @@ const ColorDisplay = props => <>
             </>
         })
     }
-    </>
+</>
 
 
 function App() {
     return <>
         <h1>Color interpolation test</h1>
 
-        {[...Array(10).keys()].map(i => <ColorDisplay steps={i+1}/>)}
+        {[...Array(10).keys()].map(i => <ColorDisplay steps={i + 1}/>)}
 
-{/*
+        {/*
 
         <h2>JSON Dump</h2>
         <pre>{JSON.stringify(metricColors, null, 2)}</pre>
@@ -126,6 +88,44 @@ function App() {
 export default App;
 
 /*
+
+// returns a hex string from a decimal number (positive of negative). The HEX string will have at least 2 digits
+function decimalToHexString(number) {
+    if (number < 0) {
+        number = 0xffffffff + number + 1;
+    }
+    let hex = number.toString(16).toUpperCase();
+    return hex.length < 2 ? "0" + hex : hex;
+}
+
+
+// Assumes h, s, and l are contained in the set [0, 1] and returns a color of format #RRGGBB
+function hslToRgb(h, s, l) {
+    var r, g, b;
+    if (s === 0) {
+        r = g = b = l; // achromatic
+    } else {
+        var hue2rgb = function hue2rgb(p, q, t) {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+        };
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return (
+        "#" +
+        decimalToHexString(Math.round(r * 255)) +
+        decimalToHexString(Math.round(g * 255)) +
+        decimalToHexString(Math.round(b * 255))
+    );
+}
 
 
 let previousParamName = ""; // used to compare previous and current values of the parameter selection box to avoid repeating calculations
