@@ -65,7 +65,7 @@ const metricColors = steps => metrics.map(metric => {
 })
 
 const ColorDisplay = props => <>
-    <h2>Gradient steps: {props.steps + 1}</h2>
+    <h2>Gradient steps: {props.steps}</h2>
     {
         metricColors(props.steps).map(metric => {
 
@@ -90,10 +90,14 @@ const ColorDisplay = props => <>
 
 function App() {
     return <>
-        <h1>Color interpolation test</h1>
 
+        <h1>Chilicon original gradients</h1>
         <ColorDisplay steps={10}/>
+
+        <h1>Our test gradients</h1>
         <ColorDisplay steps={3}/>
+        <ColorDisplay steps={2}/>
+        <ColorDisplay steps={1}/>
 
         {/*
 
